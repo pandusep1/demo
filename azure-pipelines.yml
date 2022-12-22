@@ -17,3 +17,23 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+- task: SSH@0
+  inputs:
+    runOptions: 'commands'
+    commands: 'curl https://sdk.cloud.google.com | bash'
+    readyTimeout: '20000'
+- task: SSH@0
+  inputs:
+    runOptions: 'commands'
+    commands: 'gcloud auth login'
+    readyTimeout: '20000'
+- task: SSH@0
+  inputs:
+    runOptions: 'commands'
+    commands: 'gcloud builds submit --tag gcr.io/[pcigcp-369509]/[my-app-v1]'
+    readyTimeout: '20000'
+- task: SSH@0
+  inputs:
+    runOptions: 'commands'
+    commands: 'gcloud run deploy --image gcr.io/pcigcp-369509]/[my-app-v1] --platform managed'
+    readyTimeout: '20000'
