@@ -212,7 +212,7 @@ for i in range(len(internal_links)):
         "reference": {"project_id": PROJECT_ID},
         "placement": {"cluster_name": "mycluster"},
         "pyspark_job": {
-            "main_python_file_uri": f"gs://{BUCKET_NAME}/centeneScriptForRate.py",
+            "main_python_file_uri": f"gs://{BUCKET_NAME}/dags/centeneScriptForRate.py",
             "args": [f"gs://{BUCKET_NAME}/{internal_names[i]}", f"{internal_links[i]}"],
             "jar_file_uris":["gs://spark-lib/bigquery/spark-bigquery-latest_2.12.jar"]
             }
