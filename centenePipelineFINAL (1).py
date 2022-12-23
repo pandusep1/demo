@@ -60,8 +60,8 @@ for link in json_links:
         internal_names.append(in_network_link[73:-5] + ".txt")
 
 
-BUCKET_NAME="centene_all"
-PROJECT_ID="healthcarepci"
+BUCKET_NAME="pcibktcentene"
+PROJECT_ID="pcigcp-369509"
 MY_PASS="mbgkbkuyflovqvcb"
 
 getting_file_ops = []
@@ -84,12 +84,12 @@ for i in range(len(json_links)):
     getting_file_ops.append(get_file_to_local_system)
 
     #GCS to BQ
-    DATASET_NAME="centene_temp"
+    DATASET_NAME="pci_dataset"
     TABLE_NAME=file_names[i][0:-4]
 
     bucket_to_bq = GCSToBigQueryOperator(
         task_id=f"bucket_to_bq_{i}",
-        bucket="centene_all",
+        bucket="pcibktcentene",
         source_objects=[file_names[i]],
         source_format="NEWLINE_DELIMITED_JSON",
         destination_project_dataset_table=f"{PROJECT_ID}.{DATASET_NAME}.{TABLE_NAME}",
@@ -210,7 +210,7 @@ for i in range(len(internal_links)):
     REGION="us-central1"
     PYSPARK_JOB={
         "reference": {"project_id": PROJECT_ID},
-        "placement": {"cluster_name": "myclusty"},
+        "placement": {"cluster_name": "mycluster"},
         "pyspark_job": {
             "main_python_file_uri": f"gs://{BUCKET_NAME}/centeneScriptForRate.py",
             "args": [f"gs://{BUCKET_NAME}/{internal_names[i]}", f"{internal_links[i]}"],
