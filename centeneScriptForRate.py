@@ -187,7 +187,7 @@ df_final.printSchema()
 df_final.show(20)
 
 (df_final.write.format("bigquery")
-  .option("temporaryGcsBucket","centene_all")
+  .option("temporaryGcsBucket","pcibktcentene")
   .option("table","centene_final.final_centene_rate")
   .mode("append")
   .save())
