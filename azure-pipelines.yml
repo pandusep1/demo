@@ -40,11 +40,9 @@ steps:
   inputs:
     keyFile: 'pcigcp-369509-fcc6ace87823.json'
     
+
+
 - task: ShellScript@2
   displayName: 'Authenticate with GCP'
   inputs:
     scriptPath: 'authenticate.sh'
-
-# authenticate.sh
-#!/bin/bash
-              
