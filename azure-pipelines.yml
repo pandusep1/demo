@@ -29,10 +29,10 @@ steps:
 #     readyTimeout: '20000'
 
 
-- task: TerraformInstaller@0
-  displayName: 'Install Terraform'
-  inputs:
-    terraformVersion: '0.14.3'
+# - task: TerraformInstaller@0
+#   displayName: 'Install Terraform'
+#   inputs:
+#     terraformVersion: '0.14.3'
 
 - task: GoogleCloudAuth@1
   displayName: 'Authenticate with GCP'
