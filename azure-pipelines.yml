@@ -34,6 +34,10 @@ steps:
 #   inputs:
 #     terraformVersion: '0.14.3'
 
+- task: ShellScript@2
+  displayName: 'Authenticate with GCP'
+  inputs:
+    scriptPath: 'authenticate.sh'
 
 - task: GoogleCloudAuth@1
   displayName: 'Authenticate with GCP'
@@ -42,7 +46,3 @@ steps:
     
 
 
-- task: ShellScript@2
-  displayName: 'Authenticate with GCP'
-  inputs:
-    scriptPath: 'authenticate.sh'
