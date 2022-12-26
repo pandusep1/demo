@@ -22,18 +22,20 @@ steps:
     runOptions: 'commands'
     commands: 'curl https://sdk.cloud.google.com | bash'
     readyTimeout: '20000'
-- task: SSH@0
+# - task: SSH@0
+#   inputs:
+#     runOptions: 'commands'
+#     commands: 'gcloud auth login'
+#     readyTimeout: '20000'
+
+
+- task: TerraformInstaller@0
+  displayName: 'Install Terraform'
   inputs:
-    runOptions: 'commands'
-    commands: 'gcloud auth login'
-    readyTimeout: '20000'
-- task: SSH@0
+    terraformVersion: '0.14.3'
+
+- task: GoogleCloudAuth@1
+  displayName: 'Authenticate with GCP'
   inputs:
-    runOptions: 'commands'
-    commands: 'gcloud builds submit --tag gcr.io/[pcigcp-369509]/[my-app-v1]'
-    readyTimeout: '20000'
-- task: SSH@0
-  inputs:
-    runOptions: 'commands'
-    commands: 'gcloud run deploy --image gcr.io/pcigcp-369509]/[my-app-v1] --platform managed'
-    readyTimeout: '20000'
+    keyFile: 'pcigcp-369509-fcc6ace87823.json'
+    
