@@ -16,37 +16,16 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
-- task: SSH@0
-  inputs:
-    runOptions: 'commands'
-    commands: 'curl https://sdk.cloud.google.com | bash'
-    readyTimeout: '20000'
-# - task: SSH@0
-#   inputs:
-#     runOptions: 'commands'
-#     commands: 'gcloud auth login'
-#     readyTimeout: '20000'
 
 
-# - task: TerraformInstaller@0
-#   displayName: 'Install Terraform'
-#   inputs:
-#     terraformVersion: '0.14.3'
 
 - task: ShellScript@2
-  displayName: 'Authenticate with GCP'
+  displayName: 'Install Terraform'
   inputs:
-    scriptPath: 'authenticate.sh'
+    scriptPath: 'install-terraform.sh'
 
-# - task: GoogleCloudAuth@1
-#   displayName: 'Authenticate with GCP'
-#   inputs:
-#     keyFile: 'pcigcp-369509-fcc6ace87823.json'
-    
-- task: ShellScript@2
-  displayName: 'Authenticate with GCP'
-  inputs:
-    script: |
-      gcloud auth login
-
-
+# install-terraform.sh
+#!/bin/bash
+curl -O https://releases.hashicorp.com/terraform/0.14.8/terraform_0.14.8_linux_amd64.zip
+unzip terraform_0.14.8_linux_amd64.zip
+mv terraform /usr/local/bin/
