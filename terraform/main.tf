@@ -96,11 +96,11 @@ software_config {
 //   region      = "US"
 // }
 
-provider "google" {
-  credentials = file("$(System.ArtifactsDirectory)/terraform/pcigcp-369509-fcc6ace87823.json")
-  project     = "pcigcp-369509"
-  region      = "US"
-}
+// provider "google" {
+//   credentials = file("$(System.ArtifactsDirectory)/terraform/pcigcp-369509-fcc6ace87823.json")
+//   project     = "pcigcp-369509"
+//   region      = "US"
+// }
 
 
 resource "google_storage_transfer_job" "transfer_job1" {
