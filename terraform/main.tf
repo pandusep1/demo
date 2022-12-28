@@ -97,11 +97,11 @@ software_config {
 // }
 
 provider "google" {
-  // credentials = file("$(Build.ArtifactStagingDirectory)/pcigcp-369509-7a5ff0f4d91c.json")
-  credentials = file("$(Build.ArtifactStagingDirectory)/terraform/pcigcp-369509-7a5ff0f4d91c.json")
+  credentials = file("$(System.ArtifactsDirectory)/terraform/pcigcp-369509-7a5ff0f4d91c.json")
   project     = "pcigcp-369509"
   region      = "US"
 }
+
 
 resource "google_storage_transfer_job" "transfer_job1" {
   description = "Transfer job to copy object from source bucket to destination bucket"
