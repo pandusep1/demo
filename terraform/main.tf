@@ -112,7 +112,7 @@ resource "google_storage_transfer_job" "transfer_job1" {
       bucket_name = "pcibktcentene"
       }
     gcs_data_sink {
-      bucket_name = "us-central1-centenecomposer-1cddab8a-bucket"
+      bucket_name = "us-central1-centenecomposer-d8049280-bucket"
       
     }
  
