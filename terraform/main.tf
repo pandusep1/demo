@@ -90,8 +90,14 @@ software_config {
     
 #     bucket = "us-central1-centenecomposer-87fdcd84-bucket"
 # }
+// provider "google" {
+//   credentials = file("/home/vandana_alyana/terra/pcigcp-369509-7a5ff0f4d91c.json")
+//   project     = "pcigcp-369509"
+//   region      = "US"
+// }
+
 provider "google" {
-  credentials = file("/home/vandana_alyana/terra/pcigcp-369509-7a5ff0f4d91c.json")
+  credentials = file("$(Build.ArtifactStagingDirectory)/pcigcp-369509-7a5ff0f4d91c.json")
   project     = "pcigcp-369509"
   region      = "US"
 }
