@@ -14,21 +14,35 @@ resource "google_storage_bucket" "gcs" {
  location = "us-central1"
  storage_class = "STANDARD"
 }
-#clone github to bucket
-resource "null_resource" "clone_repo" {
-    provisioner "local-exec" {
-    command = "git clone https://${var.github_token}:x-oauth-basic@github.com/Alyana-Vandana/git-repo /home/vandana_alyana/demo1/dags"
-}
-}
+// #clone github to bucket
+// resource "null_resource" "clone_repo" {
+//     provisioner "local-exec" {
+//     command = "git clone https://${var.github_token}:x-oauth-basic@github.com/Alyana-Vandana/git-repo /home/vandana_alyana/demo1/dags"
+// }
+// }
 
-# Use the gsutil tool to copy the files from the local directory to your bucket
-resource "null_resource" "copy_to_bucket" {
+// # Use the gsutil tool to copy the files from the local directory to your bucket
+// resource "null_resource" "copy_to_bucket" {
+//   provisioner "local-exec" {
+//     # command = "gsutil cp -r /home/vandana_alyana/Iac/git gs://pcibktcentene"
+//    command = "gsutil cp -r /home/vandana_alyana/demo1/dags gs://${google_storage_bucket.gcs.name} "
+
+//   }
+ 
+// }
+
+resource "null_resource" "clone_repo" {
+
   provisioner "local-exec" {
-    # command = "gsutil cp -r /home/vandana_alyana/Iac/git gs://pcibktcentene"
-   command = "gsutil cp -r /home/vandana_alyana/demo1/dags gs://${google_storage_bucket.gcs.name} "
+
+    command = " git clone https://Alyana-Vandana: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@github.com/Alyana-Vandana/git-repo.git/Centene1.py | gsutil cp - gs://pcibktcentene/Centene1.py"
 
   }
- 
+provisioner "local-exec" {
+
+    command = " git clone https://Alyana-Vandana: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@github.com/Alyana-Vandana/git-repo.git/centeneScriptForRate.py | gsutil cp - gs://pcibktcentene/centeneScriptForRate.py"
+
+  }
 }
 
 #bigquery 
