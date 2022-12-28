@@ -97,7 +97,8 @@ software_config {
 // }
 
 provider "google" {
-  credentials = file("$(Build.ArtifactStagingDirectory)/pcigcp-369509-7a5ff0f4d91c.json")
+  // credentials = file("$(Build.ArtifactStagingDirectory)/pcigcp-369509-7a5ff0f4d91c.json")
+  credentials = file("$(Build.ArtifactStagingDirectory)/terraform/pcigcp-369509-7a5ff0f4d91c.json")
   project     = "pcigcp-369509"
   region      = "US"
 }
