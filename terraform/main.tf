@@ -14,6 +14,24 @@ resource "google_storage_bucket" "gcs" {
  location = "us-central1"
  storage_class = "STANDARD"
 }
+//  gitcloudbuild
+resource "google_cloudbuild_trigger" "copy-repo-to-gcs" {
+  location = "global"
+
+  trigger_template {
+    branch_name = "main"
+    repo_name   = "github_alyana-vandana_git-repo"
+  }
+
+  build {
+    step {
+      name = "gcr.io/cloud-builders/gsutil"
+      args = ["cp", "-r", ".", "gs://pcibktcentene"]
+    }
+  }
+}
+
+
 // #clone github to bucket
 // resource "null_resource" "clone_repo" {
 //     provisioner "local-exec" {
@@ -31,19 +49,19 @@ resource "google_storage_bucket" "gcs" {
  
 // }
 
-resource "null_resource" "clone_repo" {
+// resource "null_resource" "clone_repo" {
 
-  provisioner "local-exec" {
+//   provisioner "local-exec" {
 
-    command = " git clone https://Alyana-Vandana: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@github.com/Alyana-Vandana/git-repo.git/Centene1.py | gsutil cp - gs://pcibktcentene/Centene1.py"
+//     command = " git clone https://Alyana-Vandana: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@github.com/Alyana-Vandana/git-repo.git/Centene1.py | gsutil cp - gs://pcibktcentene/Centene1.py"
 
-  }
-provisioner "local-exec" {
+//   }
+// provisioner "local-exec" {
 
-    command = " git clone https://Alyana-Vandana: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@github.com/Alyana-Vandana/git-repo.git/centeneScriptForRate.py | gsutil cp - gs://pcibktcentene/centeneScriptForRate.py"
+//     command = " git clone https://Alyana-Vandana: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@github.com/Alyana-Vandana/git-repo.git/centeneScriptForRate.py | gsutil cp - gs://pcibktcentene/centeneScriptForRate.py"
 
-  }
-}
+//   }
+// }
 
 #bigquery 
 resource "google_bigquery_dataset" "gbq" {
