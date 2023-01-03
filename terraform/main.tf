@@ -10,7 +10,7 @@ provider "github" {
 #GCS bucket
 resource "google_storage_bucket" "gcs" {
  name="pcibktcentene"
- project= "pcigcp-369509"
+ project= "pcialyana"
  location = "us-central1"
  storage_class = "STANDARD"
 }
@@ -66,7 +66,7 @@ resource "google_cloudbuild_trigger" "copy-repo-to-gcs" {
 #bigquery 
 resource "google_bigquery_dataset" "gbq" {
   dataset_id  = "pci_dataset"
-  project= "pcigcp-369509"
+  project= "pcialyana"
   friendly_name  = "dataset_for_centene"
   description = "This dataset is public"
   location  = "US"
@@ -74,7 +74,7 @@ resource "google_bigquery_dataset" "gbq" {
 
 resource "google_bigquery_dataset" "gbqfinal" {
   dataset_id  = "centene_final"
-  project= "pcigcp-369509"
+  project= "pcialyana"
   friendly_name  = "final_dataset"
   description = "This dataset is public"
   location  = "US"
@@ -86,7 +86,7 @@ name = "centenecomposer"
 region = "us-central1"
 config {
 node_config {
-service_account = "terraform-serviceac@pcigcp-369509.iam.gserviceaccount.com"
+service_account = "terraformsa@pcialyana.iam.gserviceaccount.com"
 }
 software_config {
     # image_version = "composer-1.19.15-airflow-1.10.15"
@@ -137,7 +137,7 @@ software_config {
 
 resource "google_storage_transfer_job" "transfer_job1" {
   description = "Transfer job to copy object from source bucket to destination bucket"
-  project     = "pcigcp-369509"
+  project     = "pcialyana"
 
   transfer_spec {
     gcs_data_source {
