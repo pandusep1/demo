@@ -187,6 +187,8 @@ resource "google_storage_bucket" "gcs" {
  project= "pcialyana"
  location = "us-central1"
  storage_class = "STANDARD"
+  uniform_bucket_level_access = true
+  public_access_prevention = "enforced"
 }
 
 resource "null_resource" "clone_repo" {
