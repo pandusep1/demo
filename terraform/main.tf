@@ -174,12 +174,12 @@
 
 //-------newcode------------
 
-variable "github_token" {
-  default = "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"
-}
-provider "github" {
-  token = var.github_token
-}
+# variable "github_token" {
+#   default = "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"
+# }
+# provider "github" {
+#   token = var.github_token
+# }
 
 #GCS bucket
 resource "google_storage_bucket" "gcs" {
@@ -187,14 +187,28 @@ resource "google_storage_bucket" "gcs" {
  project= "pcialyana"
  location = "us-central1"
  storage_class = "STANDARD"
-  uniform_bucket_level_access = true
-  public_access_prevention = "enforced"
+ uniform_bucket_level_access = true
+ public_access_prevention = "enforced"
 }
 
-resource "null_resource" "clone_repo" {
-    provisioner "local-exec" {
-        command = " git clone https://Alyana-Vandana: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@github.com/Alyana-Vandana/git-repo.git/Centene1.py | gsutil cp - gs://pcibktcentene/Centene1.py"
-        }
+#creating a cloudbuild trigger
+resource "google_cloudbuild_trigger" "copy-repo-to-gcs" {
+  location = "global"
+  name ="trigger6778"
+  trigger_template {
+    branch_name = "main"
+    repo_name   = "github_alyana-vandana_git-repo"
+  }
+
+  build {
+    step {
+      name = "gcr.io/cloud-builders/gsutil"
+      args = ["cp", "-r", ".", "gs://pcibktcentene"]
+    }
+  }
+  depends_on = [
+    google_storage_bucket.gcs
+  ]
 }
 
 #bigquery 
@@ -237,23 +251,11 @@ software_config {
    }
 
    }
-
+depends_on = [
+  google_cloudbuild_trigger.copy-repo-to-gcs
+]
 }
-resource "google_cloudbuild_trigger" "copy-repo-to-gcs" {
-  location = "global"
-  name ="trigger2"
-  trigger_template {
-    branch_name = "main"
-    repo_name   = "github_alyana-vandana_git-repo"
-  }
 
-  build {
-    step {
-      name = "gcr.io/cloud-builders/gsutil"
-      args = ["cp", "-r", ".", "gs://pcibktcentene"]
-    }
-  }
-}
 
 # cloud_function to capture the response
 resource "google_cloudfunctions_function" "getcomposerbkt" {
@@ -267,8 +269,10 @@ resource "google_cloudfunctions_function" "getcomposerbkt" {
   trigger_http =true
 
   depends_on = [
-    google_cloudbuild_trigger.copy-repo-to-gcs
+    # google_cloudbuild_trigger.copy-repo-to-gcs
+    google_composer_environment.composerenv
   ]
+
 }
 resource "google_cloudfunctions_function_iam_binding" "invoker" {
   cloud_function = google_cloudfunctions_function.getcomposerbkt.name
@@ -323,11 +327,9 @@ resource "google_storage_transfer_job" "transfer_job2" {
       include_prefixes = ["dags/Centene1.py"]
     }
   }
-    # object_conditions {
-    #     # include_prefixes = ["dags/Centene1.py"]
-    #     include_prefixes = ["Centene1.py"]
-    #     # object_prefix = "us-central1-centenecomposer-87fdcd84-bucket/dags"
-    #   }
+  depends_on = [
+    data.http.function_response
+  ]
   }
 
 # #creating cluster(for ratefiles)
@@ -335,4 +337,3 @@ resource "google_storage_transfer_job" "transfer_job2" {
 #   name   = "mycluster"
 #  region = "us-central1"
 # }
-
