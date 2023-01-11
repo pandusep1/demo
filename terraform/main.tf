@@ -215,6 +215,7 @@ software_config {
 # cloud_function to capture the response
 resource "google_cloudfunctions_function" "getcomposerbkt" {
   name     = "getcomposerbkt"
+  service_account_email ="terraformsa@pcialyana.iam.gserviceaccount.com"
   region   = "us-central1"
   runtime  = "python38"
   source_archive_bucket = "pcibktcentene"
