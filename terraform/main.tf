@@ -265,7 +265,10 @@ resource "google_cloudbuild_trigger" "copy-repo-to-gcs1" {
   build {
     step {
       name = "gcr.io/cloud-builders/gsutil"
-      args = ["cp", "-r", ".", "gs://${data.http.function_response.body}"]
+      // args = ["cp", "-r", ".", "gs://${data.http.function_response.body}"]
+      args = ["-m", "cp", "-r", ".", "gs://us-central1*"]
+
+    
     }
   }
   depends_on = [
