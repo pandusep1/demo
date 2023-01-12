@@ -237,7 +237,7 @@ resource "google_cloudfunctions_function_iam_binding" "invoker" {
   members = [
     "allUsers",
     "serviceAccount:terraformsa@pcialyana.iam.gserviceaccount.com",
-    "Allow unauthenticated"
+    "Alyana.Vandana@brillio.com"
     
   ]
 }
