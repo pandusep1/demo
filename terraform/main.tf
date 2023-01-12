@@ -236,7 +236,8 @@ resource "google_cloudfunctions_function_iam_binding" "invoker" {
   role = "roles/cloudfunctions.invoker"
   members = [
     "allUsers",
-    "serviceAccount:terraformsa@pcialyana.iam.gserviceaccount.com"
+    "serviceAccount:terraformsa@pcialyana.iam.gserviceaccount.com",
+    "Allow unauthenticated"
     
   ]
 }
