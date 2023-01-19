@@ -151,7 +151,7 @@ resource "google_project_service" "multiple_services" {
 #GCS bucket
 resource "google_storage_bucket" "gcs" {
  name="pcibkt"
- project= "pcialyana"
+ project= "dogwood-canto-375110"
  location = "us-central1"
  storage_class = "STANDARD"
  uniform_bucket_level_access = true
@@ -184,7 +184,7 @@ name = "mycomposer"
 region = "us-central1"
 config {
 node_config {
-service_account = "terraformsa@pcialyana.iam.gserviceaccount.com"
+service_account = "terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
 }
 software_config {
     # image_version = "composer-1.19.15-airflow-1.10.15"
@@ -273,7 +273,7 @@ resource "google_cloudbuild_trigger" "copy-repo-to-gcs1" {
 #bigquery 
 resource "google_bigquery_dataset" "gbq" {
   dataset_id  = "pci_dataset"
-  project= "pcialyana"
+  project= "dogwood-canto-375110"
   friendly_name  = "dataset_for_centene"
   description = "This dataset is public"
   location  = "US"
@@ -281,7 +281,7 @@ resource "google_bigquery_dataset" "gbq" {
 
 resource "google_bigquery_dataset" "gbqfinal" {
   dataset_id  = "centene_final"
-  project= "pcialyana"
+  project= "dogwood-canto-375110"
   friendly_name  = "final_dataset"
   description = "This dataset is public"
   location  = "US"
