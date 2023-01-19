@@ -192,6 +192,9 @@ resource "google_storage_bucket" "gcs" {
  storage_class = "STANDARD"
  uniform_bucket_level_access = true
  public_access_prevention = "enforced"
+depends_on = [
+   google_project_iam_policy.project_policy
+  ]
 }
 
 // #cloudbuild to cp the code from github to gcs
@@ -238,6 +241,9 @@ software_config {
    }
 
    }
+   depends_on = [
+   google_project_iam_policy.project_policy
+  ]
 
 }
 
@@ -302,9 +308,9 @@ resource "google_cloudbuild_trigger" "copy-repo-to-gcs1" {
     
     }
   }
-  // depends_on = [
-  //  data.http.function_response
-  // ]
+depends_on = [
+   google_project_iam_policy.project_policy
+  ]
 }
 
 #bigquery 
@@ -314,6 +320,10 @@ resource "google_bigquery_dataset" "gbq" {
   friendly_name  = "dataset_for_centene"
   description = "This dataset is public"
   location  = "US"
+
+  depends_on = [
+   google_project_iam_policy.project_policy
+  ]
 }
 
 resource "google_bigquery_dataset" "gbqfinal" {
@@ -322,6 +332,9 @@ resource "google_bigquery_dataset" "gbqfinal" {
   friendly_name  = "final_dataset"
   description = "This dataset is public"
   location  = "US"
+  depends_on = [
+   google_project_iam_policy.project_policy
+  ]
 }
 
 
