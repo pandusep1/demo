@@ -145,6 +145,42 @@ resource "google_project_service" "multiple_services" {
   service = element(var.services, count.index)
 }
 
+resource "google_project_iam_policy" "project_policy" {
+  project = "dogwood-canto-375110"
+  bindings = [
+    {
+      role = "roles/storage.admin"
+      members = [
+        "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      role = "roles/composer.admin"
+      members = [
+        "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      role = "roles/bigquery.admin"
+      members = [
+        "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      role = "roles/cloudbuild.admin"
+      members = [
+        "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      role = "roles/dataproc.admin"
+      members = [
+        "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
+      ]
+    }
+  ]
+}
+
 
 
 
