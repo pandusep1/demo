@@ -181,6 +181,7 @@ resource "google_storage_bucket" "gcs" {
 #creating composer environment
 resource "google_composer_environment" "composerenv" {
 name = "mycomposer"
+project= "dogwood-canto-375110"
 region = "us-central1"
 config {
 node_config {
