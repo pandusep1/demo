@@ -45,6 +45,10 @@ resource "google_storage_bucket" "gcs" {
  name="${var.bucket_name}"
  project= "${var.project_name}"
  location = "${var.location}"
+   encryption {
+    default_kms_key_name = "projects/dogwood-canto-375110/locations/us-central1/keyRings/EncKey/cryptoKeys/enckey"
+  }
+
  storage_class = "STANDARD"
  uniform_bucket_level_access = true
  public_access_prevention = "enforced"
