@@ -152,35 +152,35 @@ resource "google_project_service" "multiple_services" {
   service = element(var.services, count.index)
 }
 
-resource "google_project_iam_member" "storage_admin" {
-  project ="dogwood-canto-375110"
-  role = "roles/storage.admin"
-  member = "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
-}
+// resource "google_project_iam_member" "storage_admin" {
+//   project ="dogwood-canto-375110"
+//   role = "roles/storage.admin"
+//   member = "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
+// }
 
-resource "google_project_iam_member" "composer_admin" {
-  project = "dogwood-canto-375110"
-  role = "roles/composer.admin"
-  member = "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
-}
+// resource "google_project_iam_member" "composer_admin" {
+//   project = "dogwood-canto-375110"
+//   role = "roles/composer.admin"
+//   member = "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
+// }
 
-resource "google_project_iam_member" "bigquery_admin" {
-  project ="dogwood-canto-375110"
-  role = "roles/bigquery.admin"
-  member = "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
-}
+// resource "google_project_iam_member" "bigquery_admin" {
+//   project ="dogwood-canto-375110"
+//   role = "roles/bigquery.admin"
+//   member = "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
+// }
 
-resource "google_project_iam_member" "cloud_build_admin" {
-  project = "dogwood-canto-375110"
-  role = "roles/cloudbuild.admin"
-  member = "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
-}
+// resource "google_project_iam_member" "cloud_build_admin" {
+//   project = "dogwood-canto-375110"
+//   role = "roles/cloudbuild.admin"
+//   member = "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
+// }
 
-resource "google_project_iam_member" "cloud_dataproc_admin" {
-  project = "dogwood-canto-375110"
-  role = "roles/dataproc.admin"
-  member = "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
-}
+// resource "google_project_iam_member" "cloud_dataproc_admin" {
+//   project = "dogwood-canto-375110"
+//   role = "roles/dataproc.admin"
+//   member = "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
+// }
 
 
 
