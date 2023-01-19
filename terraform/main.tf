@@ -20,12 +20,12 @@ variable "bucket_name" {
 
 variable "bigquery_name_stagging" {
   type= string
-  deafult= "Staingdataset"
+  default= "Staingdataset"
 }
 
 variable "bigquery_name_final" {
   type= string
-  deafult= "finaldataset"
+  default= "finaldataset"
 }
 
 
