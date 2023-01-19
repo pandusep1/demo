@@ -144,7 +144,7 @@
 #enabling API'S
 variable "services" {
   type = list(string)
-  default = ["storage.googleapis.com", "datastore.googleapis.com"]
+  default = ["storage.googleapis.com", "datastore.googleapis.com","composer.googleapis.com","bigquery.googleapis.com"]
 }
 
 resource "google_project_service" "multiple_services" {
