@@ -137,12 +137,14 @@
 #enabling API'S
 variable "services" {
   type = list(string)
-  default = ["storage.googleapis.com", "composer.googleapis.com","cloudbuild.googleapis.com","dataproc.googleapis.com","bigquery.googleapis.com"]
+  default = ["storage.googleapis.com", "datastore.googleapis.com"]
 }
+
 resource "google_project_service" "multiple_services" {
-  for_each = var.services
-  service = each.value
+  count = length(var.services)
+  service = element(var.services, count.index)
 }
+
 
 
 
