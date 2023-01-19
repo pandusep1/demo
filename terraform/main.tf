@@ -132,11 +132,13 @@
 //   description = "This dataset is public"
 //   location  = "US"
 // }
-resource "google_project_iam_member" "project_iam_admin" {
-  project ="dogwood-canto-375110"
-  role = "roles/resourcemanager.projectIamAdmin"
-  member = "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
-}
+
+
+// resource "google_project_iam_member" "project_iam_admin" {
+//   project ="dogwood-canto-375110"
+//   role = "roles/resourcemanager.projectIamAdmin"
+//   member = "serviceAccount:terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
+// }
 
 
 #enabling API'S
