@@ -135,15 +135,16 @@
 
 
 #enabling API'S
+variable "services" {
+  type = list(string)
+  default = ["storage.googleapis.com", "composer.googleapis.com","cloudbuild.googleapis.com","dataproc.googleapis.com","bigquery.googleapis.com"]
+}
 resource "google_project_service" "multiple_services" {
   for_each = var.services
   service = each.value
 }
 
-variable "services" {
-  type = list(string)
-  default = ["storage.googleapis.com", "composer.googleapis.com","cloudbuild.googleapis.com","dataproc.googleapis.com","bigquery.googleapis.com"]
-}
+
 
 #GCS bucket
 resource "google_storage_bucket" "gcs" {
