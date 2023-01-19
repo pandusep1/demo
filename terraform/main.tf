@@ -57,7 +57,7 @@ resource "google_storage_bucket" "gcs" {
 resource "google_composer_environment" "composerenv" {
 name = "mycomposer"
  project= "${var.project_name}"
- location = "${var.location}"
+//  location = "${var.location}"
 config {
 node_config {
 service_account = "terraformcicd@dogwood-canto-375110.iam.gserviceaccount.com"
