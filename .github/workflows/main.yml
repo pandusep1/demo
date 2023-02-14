@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+jobs:
+   build:
+     name: Job_1
+     runs-on: ubuntu-latest
+     steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+       with:
+        fetch-depth: 1
+     - name: Copy Files to Artifact
+       run: |
+        cp -r terraform $(build.artifactstagingdirectory)/terraform
+     - name: Publish Artifact
+       uses: actions/upload-artifact@v1
+       with:
+        name: terraform
+     - name: Download tfSec
+       run: |
+        curl -L -o tfsec https://github.com/tfsec/tfsec/releases/download/v0.34.0/tfsec-linux-amd64     - name: tfsec Install
+        run: |
+         chmod +x tfsec
+         sudo mv tfsec /usr/local/bin
+     - name: Script-validating
+       run: tfsec $(build.artifactstagingdirectory)/terraform
