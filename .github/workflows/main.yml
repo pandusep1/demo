@@ -23,5 +23,5 @@ jobs:
          run: terraform validate 
        - name: Deploy infrastructure
          run: |
-           terraform plan -out=tfplan 
+           terraform plan 
            terraform apply tfplan
