@@ -20,10 +20,7 @@ jobs:
        - name: Validate Terraform code 
          run: terraform validate 
        - name: Deploy infrastructure
-         uses: action/upload-artifact@v3.1.2
-         with:
-            path: main/teraform/
-       - name: deploy
          run: | 
-          terraform plan -out=tfplan 
-          terraform apply tfplan
+           cd terraform/main.tf
+           terraform plan -out=tfplan 
+           terraform apply tfplan
