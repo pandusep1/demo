@@ -10,8 +10,6 @@ jobs:
      steps:
      - name: Checkout
        uses: actions/checkout@v2
-       with:
-        fetch-depth: 1
      -  name: Install Terraform 
         run: | 
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - 
