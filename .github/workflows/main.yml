@@ -8,18 +8,18 @@ jobs:
      name: Job_1
      runs-on: ubuntu-latest
      steps:
-     - name: Checkout
-       uses: actions/checkout@v3.3.0
-     -  name: Install Terraform 
-        run: | 
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      -  name: Install Terraform 
+         run: | 
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - 
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" 
           sudo apt-get update && sudo apt-get install terraform 
-     -  name: Initialize Terraform 
-        run: terraform init 
-     - name: Validate Terraform code 
-       run: terraform validate 
-     - name: Deploy infrastructure  
-        run:| 
+      -  name: Initialize Terraform 
+         run: terraform init 
+      - name: Validate Terraform code 
+        run: terraform validate 
+      - name: Deploy infrastructure  
+         run:| 
           terraform plan -out=tfplan 
           terraform apply tfplan
