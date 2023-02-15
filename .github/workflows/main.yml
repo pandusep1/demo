@@ -10,6 +10,8 @@ jobs:
      steps:
        - name: Checkout
          uses: actions/checkout@v3.3.0
+       - name: Change to directory containing main.tf
+         run: cd $(dirname terraform/main.tf)
        - name: Install Terraform 
          run: | 
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - 
@@ -20,7 +22,6 @@ jobs:
        - name: Validate Terraform code 
          run: terraform validate 
        - name: Deploy infrastructure
-         run: | 
-           cd terraform/main.tf
+         run: |
            terraform plan -out=tfplan 
            terraform apply tfplan
