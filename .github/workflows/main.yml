@@ -12,9 +12,7 @@ jobs:
          uses: actions/checkout@v3.3.0       
        - name: Install Terraform 
          run: | 
-          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - 
-          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" 
-          sudo apt-get update && sudo apt-get install terraform 
+           ${{env.COMMANDS}}
        - name: change the directory
          run: cd $(dirname terraform/main.tf)
        - name: Initialize Terraform 
