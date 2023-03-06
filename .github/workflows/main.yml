@@ -3,13 +3,10 @@ on:
   push:
     branches:
       - main
-env: 
-  VM: ${{env.VM}}
-  #virtual machine given
 jobs:
    build:
      name: Job_1
-     runs-on: $VM
+     runs-on: ${{env.VM}}
      steps:
        - name: Checkout
          uses: actions/checkout@v3.3.0       
