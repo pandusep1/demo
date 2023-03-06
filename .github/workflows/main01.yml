@@ -1,0 +1,40 @@
+#In this CI pipeline we are building a project using NODE packages
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  MY_ARTIFACT_PATH: ${{ env.MY_ARTIFACT_PATH }}
+  NODE_VERSION: ${{ env.NODE_VERSION }}
+  VM: ${{env.VM}}
+  COMMANDS: ${{env.COMMANDS}}
+
+jobs:
+  build:
+    runs-on: $VM
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.6.0
+      with:
+        node-version: '$NODE_VERSION'
+
+    - name: Install dependencies & run the test
+      run: |
+	     $COMMANDS
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: my-artifact
+        path: $MY_ARTIFACT_PATH
+	- name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: my-artifact
+        path: $MY_ARTIFACT_PATH
