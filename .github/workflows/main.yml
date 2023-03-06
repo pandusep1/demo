@@ -21,7 +21,4 @@ jobs:
          run: terraform init
        - name: Validate Terraform code 
          run: terraform validate 
-       - name: Deploy infrastructure
-         run: |
-           terraform plan 
-           terraform apply tfplan
+
