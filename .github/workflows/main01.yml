@@ -1,4 +1,4 @@
-#In this CI pipeline we are building a project using NODE packages
+#In this CI pipeline we are building a project using NODE packages, and uploading the artifact that are created during this build in the Virtual Machinr
 name: CI
 
 on:
@@ -8,33 +8,47 @@ on:
     branches: [ main ]
 
 env:
+  # this is he path htat should be where the artifact will be
   MY_ARTIFACT_PATH: ${{ env.MY_ARTIFACT_PATH }}
+  
+  #node version that should be used 
   NODE_VERSION: ${{ env.NODE_VERSION }}
+  
+  #provide the Virtual Machine that the project has to runs-on i.e. ubuntu, mac,windows etc..
   VM: ${{env.VM}}
+  
+  #provide the necessary commands that are required for the projectr to run and test 
   COMMANDS: ${{env.COMMANDS}}
 
 jobs:
   build:
-    runs-on: $VM
+    runs-on: ubuntu-latest
     steps:
+	
+	#checkout the code from repository to the $VM
     - name: Checkout code
       uses: actions/checkout@v2
+	  
+	#setting up the node.js environmentfor the project
     - name: Setup Node.js environment
       uses: actions/setup-node@v3.6.0
       with:
         node-version: '$NODE_VERSION'
-
-    - name: Install dependencies & run the test
-      run: |
-	     $COMMANDS
-
+		
+	#giving the commands for the npm to start and run the test
+    - name: Install NPM dependencies & run the test
+      run: $COMMANDS
+	  
+	#uploading the artifact in the VM, so that it can be used for further use i.e. testing, development
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: my-artifact
-        path: $MY_ARTIFACT_PATH
-	- name: Download artifact
+        path: $MY_ARTIFACT_PATH 
+	
+	#downloading the artifact to the loacal machine ,so that it can be used for further use i.e. testing, development
+    - name: Download artifact
       uses: actions/download-artifact@v3
       with:
-        name: my-artifact
-        path: $MY_ARTIFACT_PATH
+            name: my-artifact
+            path: $MY_ARTIFACT_PATH 
